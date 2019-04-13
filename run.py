@@ -1,5 +1,5 @@
-from app import tele2
+from app import main
 
 if __name__ == '__main__':
-    tele2.start()
+    main.start()
 
