@@ -10,6 +10,102 @@
     <title>WorkShop for Seller</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col pt-5">
+            <div class="btn-group mb-4">
+                <button type="button" class="btn btn-lg btn-secondary">GOODS</button>
+                <a href="{{url_for('sales')}}" class="btn btn-lg btn-secondary">SALES</a>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-4">
+                    <a href="{{url_for('product_edit',item_id=empty_id)}}" class="btn btn-primary"
+                       title="ADD ITEMS">ADD ITEMS</a>
+                    <form id="import-from" class="d-none" method="post" action="{{url_for('product_import')}}"
+                          enctype="multipart/form-data">
+                        <input id="import-field" type="file" name="import-file"
+                               onchange="document.getElementById('import-form').submit()">
+                    </form>
+                    <a href="#" class="btn btn-primary" title="Import CSV" onclick="open_file_dialog()">IMPORT</a>
+                    <a href="{{url_for('product_export')}}" class="btn btn-primary" title="Export CSV">EXPORT</a>
+                </div>
+                <div class="col-8">
+                    <form>
+                        <input name="search" class="form-control" placeholder="Search by name" type="search"
+                               value="{{search}}">
+                    </form>
+                </div>
+            </div>
+            <script><!--
+                function open_file_dialog(){
+                    var element = document.getElementById('import-field');
+                    if(element.click){
+                        element.click();
+                    }else if(document.createEvent){
+                        var eventObj = document.createEvent('MouseEvents');
+                        eventObj.initEvent('click',true,true);
+                        element.dispatchEvent(eventObj);
+                    }
+                    return false;
+                }
+            --></script>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">
+                        {% if sort_field == 'name' and sort_order == 'asc'%}
+                        <a href="{{url_for('index', sort_field='name', sort_order='desc', search=search)}}">
+                            {% else %}
+                            <a href="{{url_for('index', sort_field='name', sort_order='asc', search=search)}}">
+                                {% endif %}
+                                {% if sort_field == 'name' and sort_order == 'asc' %}
+                                <p>NAME↑</p>
+                                {% elif sort_field == 'name' and sort_order == 'desc' %}
+                                <p>NAME↓</p>
+                                {% else %}
+                                {% endif %}
+                            </a>
+                        </a>
+                    </th>
+                    <th>
+                        {% if sort_field == 'price' and sort_order == 'asc'%}
+                        <a href="{{url_for('index', sort_field='price', sort_order='desc', search=search)}}">
+                            {% else %}
+                            <a href="{{url_for('index', sort_field='price', sort_order='asc', search=search)}}">
+                                {% endif %}
+                                {% if sort_field == 'price' and sort_order == 'asc' %}
+                                <p>↑</p>
+                                {% elif sort_field == 'price' and sort_order == 'desc' %}
+                                <p>↓</p>
+                                {% else %}
+                                <p>Price(rub)</p>
+                                {% endif %}
+                            </a>
+                        </a>
+                    </th>
+                        <th>
+                        {% if sort_field == 'amount' and sort_order == 'asc'%}
+                        <a href="{{url_for('index', sort_field='amount', sort_order='desc', search=search)}}">
+                            {% else %}
+                            <a href="{{url_for('index', sort_field='amount', sort_order='asc', search=search)}}">
+                                {% endif %}
+                                {% if sort_field == 'amount' and sort_order == 'asc' %}
+                                <p>AMOUNT↑</p>
+                                {% elif sort_field == 'amount' and sort_order == 'desc' %}
+                                <p>AMOUNT↓</p>
+                                {% else %}
+                                {% endif %}
+                            </a>
+                        </a>
+                    </th>
 
+
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

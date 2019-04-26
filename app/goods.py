@@ -11,7 +11,7 @@ class EmptyProduct:
 
 class Product:
     def __init__(self, name, *, price=0, amount=0):
-        self.id = str(uuid.UUID())
+        self.id = str(uuid.uuid4())
         self.name = name
         self.price = int(price)
         self.amount = int(amount)
@@ -38,6 +38,9 @@ class ProductManager:
 
     def search_by_name(self, name):
         return list(filter(lambda o: name.lower() in o.name.lower(), self.items))
+
+    def search_by_id(self, item_id):
+        return list(filter(lambda o: item_id == o.id, self.items))[0]
 
     def sort_items(self, sort_field, sort_order):
         self.items.sort(key=lambda x:getattr(x, sort_field), reverse=(sort_order == 'desc'))

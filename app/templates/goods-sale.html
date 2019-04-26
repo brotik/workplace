@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>CLEARANCE SALE{{item.name}}</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col pt-5">
+            <h1 class="mb-4">CLEARANCE SALE</h1>
+            {% if alert %}
+            <div class="alert alert-{{alert.class}}" role="alert">{{alert.msg}}</div>
+            {% endif %}
+            <p>
+                <span>NAME: </span>
+                <strong>{{item.name}}</strong>
+            </p>
+            <p>
+                <span>PRICE: </span>
+                <strong>{{item.price}} rub</strong>
+            </p>
+            <p>
+                <span>AMOUNT: </span>
+                <strong>{{item.amount}} pieces</strong>
+            </p>
+            <hr class="mb-5">
+            <form action="{{url_for('sale_add')}}" method="post">
+                <div class="form-group row">
+                    <label for="amount" class="col-sm-2 col-form-label">amount</label>
+                    <div class="col-sm-10">
+                        <input id="amount" class="form-control" type="text" value="1" name="amount" required>
+                        <input type="hidden" name="item_id" value="{{item.id}}">
+                    </div>
+                </div>
+                <div class="form-group row pt-3">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary">COMMIT</button>
+                        <a href="{{url_for('index')}}" class="btn btn-secondary">Back to goods list</a>
+                        <a href="{{url_for('sales')}}" class="btn btn-secondary">Back to sales list</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
